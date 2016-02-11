@@ -1,0 +1,25 @@
+{
+  "name": "testAngular2",
+  "homepage": "index.html",
+  "authors": [
+    "[juliettemijeon] <[juliette.mijeon@gmail.com]>"
+  ],
+  "description": "test Angular 2e essai",
+  "main": "index.html",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.0",
+    "jquery": "^2.2.0"
+  }
+}
