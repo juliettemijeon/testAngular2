@@ -2,16 +2,43 @@
 <html ng-app="store">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Gem Store</title>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
     <script src="web/app/app.js"></script>
 </head>
 <body class="container" ng-controller="StoreController as store">
-    <div class = "product row" ng-repeat="product in store.products">
+    <div class = "product row" ng-repeat="product in store.products | orderBy:'-price'">
         <h1> {{ product.name }} </h1>
-        <h2> ${{ product.price }} </h2>
-        <p> {{ product.description }} </p>
+        <h2> ${{ product.price | currency }} </h2>
+        <section ng-controller="PanelController as panel">
+            <ul class = "nav nav pills">
+                <li ng-class="{active: panel.isSelected(1}">
+                    <a href ng-click="panel.selectTab(1)">Description</a>
+                </li>
+                <li ng-class="{active: panel.isSelected(2}">
+                    <a href ng-click="panel.selectTab(2)">Specifications</a>
+                </li>
+                <li ng-class="{active: panel.isSelected(3}">
+                    <a href ng-click="panel.selectTab(3)">Reviews</a>
+                </li>
+            </ul>
+            <div class="panel" ng-show="panel.isSelected(1)">
+                <h4>Description</h4>
+                <p>{{ product.description }}</p>
+            </div>
+        </section>
+        <div class="gallery" ng-show="product.images.length>0">
+            <div class="img-wrap">
+                <img ng-src="{{product.images[0]}}" />
+            </div>
+            <ul class="img-thumbnails clearfix">
+                <li class="small-image pull-left thumbnail" ng-repeat="image in product.images">
+                    <img ng-src="{{image}}" />
+                </li>
+            </ul>
+        </div>
+        <img ng-src="{{ product.images[0].full }}"/>
         <button ng-show="store.product.canPurchase"> Add to Cart </button>
     </div>
 </body>
